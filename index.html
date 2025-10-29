@@ -1,120 +1,92 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Produktinformation – CSS Dropdown Test</title>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Produktinformation – Mjuk CSS Accordion</title>
   <style>
-    /* === Grundinställningar === */
     body {
-      font-family: "Inter", Arial, sans-serif;
-      background: #f7f7f7;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f4f4f4;
       color: #111;
       margin: 0;
       padding: 40px 20px;
-      line-height: 1.6;
     }
 
-    /* === Rubrik === */
     h1 {
       text-align: center;
-      font-size: 1.8rem;
-      font-weight: 700;
+      font-size: 2rem;
       margin-bottom: 40px;
     }
 
-    /* === Wrapper för alla flikar === */
     .accordion {
       max-width: 720px;
-      margin: 0 auto;
+      margin: auto;
     }
 
-    /* === Varje flik använder HTML-elementet <details> === */
     details {
-      background: #fff;
+      background-color: #fff;
       border-radius: 8px;
       margin-bottom: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       overflow: hidden;
-      transition: box-shadow 0.3s ease;
     }
 
-    /* === Liten hover-effekt för att visa klickbarhet === */
-    details:hover,
-    details:focus-within {
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-    }
-
-    /* === Sammanfattningsraden som visas innan klick === */
     summary {
+      padding: 20px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      cursor: pointer;
-      list-style: none;
-      padding: 18px 22px;
-      font-size: 1rem;
-      font-weight: 600;
-      background: #fff;
-      color: #111;
-      outline: none;
+      background-color: #fff;
+      transition: background-color 0.3s ease;
     }
 
-    /* === Fokusmarkering (WCAG) === */
-    summary:focus {
-      outline: 3px solid #ff8800;
-      outline-offset: 2px;
+    summary:hover {
+      background-color: #f0f0f0;
     }
 
-    /* === Tar bort standardmarkören från summary === */
     summary::-webkit-details-marker {
       display: none;
     }
 
-    /* === Plustecknet till höger === */
     .arrow {
       font-size: 24px;
-      font-weight: 300;
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease-in-out;
     }
 
-    /* === Roterar plustecknet när fliken öppnas === */
     details[open] .arrow {
       transform: rotate(45deg);
     }
 
-    /* === Innehållet i dropdownen (döljs från början) === */
-    .content {
+    .content-wrapper {
       max-height: 0;
-      overflow: hidden;
       opacity: 0;
-      padding: 0 22px;
-      background: #fff;
-      border-top: 1px solid #eee;
+      padding: 0 24px;
+      overflow: hidden;
       transition:
-        max-height 0.5s ease,
-        opacity 0.4s ease,
-        padding 0.4s ease;
+        max-height 5s ease-in-out,
+        opacity 5s ease-in-out,
+        padding 5s ease-in-out;
     }
 
-    /* === När fliken öppnas, visas innehållet mjukt === */
-    details[open] .content {
-      max-height: 1000px; /* tillräckligt stort för allt innehåll */
+    details[open] .content-wrapper {
+      max-height: 1000px;
       opacity: 1;
-      padding: 18px 22px 22px 22px;
+      padding: 20px 24px 24px 24px;
     }
 
-    /* === Text i innehållet === */
-    .content p {
+    .content-wrapper p {
       margin: 0 0 10px;
     }
 
-    .content strong {
+    .content-wrapper strong {
       color: #ff8800;
     }
 
-    /* === Responsivitet för mobil === */
     @media (max-width: 480px) {
       body {
         padding: 20px 10px;
@@ -123,74 +95,56 @@
         font-size: 0.95rem;
         padding: 16px;
       }
-      .content {
+      .content-wrapper {
         padding: 10px 16px;
       }
     }
   </style>
 </head>
-
 <body>
-  <!-- === Titel === -->
-  <h1>Produktinformation</h1>
 
-  <!-- === Hela accordion-strukturen === -->
+  <h1>Produktinformation</h1>
   <div class="accordion">
 
-    <!-- === Flik 1: Detaljer === -->
     <details>
-      <summary role="button" aria-controls="yta" aria-expanded="false">
-        Detaljer <span class="arrow">+</span>
-      </summary>
-      <div class="content" id="yta">
-        <p><strong>Yta:</strong> Väg</p>
-        <p><strong>Häldrop:</strong> 5 mm</p>
-        <p><strong>Vikt:</strong> 185 g / 6.5 oz</p>
-        <p><strong>Stöd:</strong> Neutral</p>
-        <p><strong>Dämpning:</strong> Normal</p>
+      <summary>Detaljer <span class="arrow">+</span></summary>
+      <div class="content-wrapper">
+        <p><strong>Underlag:</strong> Optimerad för asfalt och hårda ytor</p>
+        <p><strong>Häldrop:</strong> 5 mm för naturlig löpkänsla</p>
+        <p><strong>Vikt:</strong> Endast 185 gram – lätt och snabb</p>
+        <p><strong>Stödnivå:</strong> Neutral – för dig med stabilt steg</p>
+        <p><strong>Dämpning:</strong> Balanserad för både tempo och komfort</p>
       </div>
     </details>
 
-    <!-- === Flik 2: Pronation === -->
     <details>
-      <summary role="button" aria-controls="pronation" aria-expanded="false">
-        Pronation <span class="arrow">+</span>
-      </summary>
-      <div class="content" id="pronation">
-        <p><strong>Designad för:</strong> Neutral / Underpronation</p>
-        <p><strong>Fottyp:</strong> Fotvalv i normal storlek</p>
-        <p><strong>Avstamp:</strong> En jämn distribution sker från fotens framdel.</p>
-        <p><strong>Hur foten möter marken:</strong> Foten landar på utsidan av hälen och rullar inåt (pronerar) för att absorbera stötar och bära upp kroppsvikten.</p>
-        <p><strong>Underpronation:</strong> Höga fotvalv, tryck på de mindre tårna, liten pronation.</p>
+      <summary>Pronation <span class="arrow">+</span></summary>
+      <div class="content-wrapper">
+        <p><strong>Passar dig som:</strong> Har neutralt steg eller underpronerar</p>
+        <p><strong>Fotvalv:</strong> Normalt – varken högt eller lågt</p>
+        <p><strong>Avveckling:</strong> Jämn tryckfördelning över framfoten</p>
+        <p><strong>Stegkontakt:</strong> Landar på utsidan av hälen och rullar mjukt inåt</p>
       </div>
     </details>
 
-    <!-- === Flik 3: Teknik och funktioner === -->
     <details>
-      <summary role="button" aria-controls="teknik" aria-expanded="false">
-        Teknik & Funktioner <span class="arrow">+</span>
-      </summary>
-      <div class="content" id="teknik">
-        <p><strong>MOTION WRAP 2.0:</strong> Förbättrad ventilation och komfort.</p>
-        <p><strong>FF TURBO PLUS:</strong> Dämpning som ger bättre kompression och energiåtervinning.</p>
-        <p><strong>Kurvad sula:</strong> Hjälper löpare att spara energi i varje steg.</p>
-        <p><strong>Kolfiberplatta:</strong> Driver foten framåt i löpsteget.</p>
-        <p><strong>ASICSGRIP-gummi:</strong> Förbättrad slitstyrka och grepp.</p>
+      <summary>Teknik & Funktioner <span class="arrow">+</span></summary>
+      <div class="content-wrapper">
+        <p><strong>MOTION WRAP™ 2.0:</strong> Sömlös passform med maximal ventilation</p>
+        <p><strong>FF TURBO PLUS:</strong> Responsiv dämpning med extra energiåtergivning</p>
+        <p><strong>Guided Geometry:</strong> Kurvad sula som sparar energi i varje steg</p>
+        <p><strong>Kolfiberplatta:</strong> Ger explosiv kraft i frånskjutet</p>
       </div>
     </details>
 
-    <!-- === Flik 4: Miljö och hållbarhet === -->
     <details>
-      <summary role="button" aria-controls="miljo" aria-expanded="false">
-        Miljö & Hållbarhet <span class="arrow">+</span>
-      </summary>
-      <div class="content" id="miljo">
-        <p><strong>Återvunnet material:</strong> Minst 50 % av skons överdel består av återvunnet material.</p>
-        <p><strong>Vattenbesparing:</strong> Färgningen minskar vattenanvändningen med cirka 33 % och koldioxidutsläpp med cirka 45 % jämfört med konventionell färgningsteknik.</p>
+      <summary>Miljö & Hållbarhet <span class="arrow">+</span></summary>
+      <div class="content-wrapper">
+        <p><strong>Återvunnet material:</strong> Minst 50 % av ovandelen</p>
+        <p><strong>Miljöpåverkan:</strong> 33 % mindre vattenåtgång och 45 % lägre koldioxidutsläpp jämfört med traditionell tillverkning</p>
       </div>
     </details>
 
   </div>
 </body>
 </html>
-
