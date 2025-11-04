@@ -1,150 +1,135 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Produktinformation – Mjuk CSS Accordion</title>
-  <style>
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background-color: #f4f4f4;
-      color: #111;
-      margin: 0;
-      padding: 40px 20px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produktinformation – 0.5s Mjuk Accordion</title>
+<style>
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #f4f4f4;
+  color: #111;
+  margin: 0;
+  padding: 40px 20px;
+}
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+.accordion {
+  max-width: 720px;
+  margin: auto;
+}
 
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 40px;
-    }
+.accordion input[type="checkbox"] {
+  display: none;
+}
 
-    .accordion {
-      max-width: 720px;
-      margin: auto;
-    }
+.accordion label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 20px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom: 8px;
+  transition: background-color 0.3s ease;
+}
+.accordion label:hover {
+  background: #f0f0f0;
+}
 
-    details {
-      background-color: #fff;
-      border-radius: 8px;
-      margin-bottom: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      overflow: hidden;
-    }
+/* Plus-tecken */
+.accordion label::after {
+  content: "+";
+  font-size: 24px;
+  transition: transform 0.5s cubic-bezier(0.45, 0, 0.25, 1);
+}
 
-    summary {
-      padding: 20px 24px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      list-style: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #fff;
-      transition: background-color 0.3s ease;
-    }
+input[type="checkbox"]:checked + label::after {
+  transform: rotate(45deg);
+}
 
-    summary:hover {
-      background-color: #f0f0f0;
-    }
+/* Innehåll */
+.content {
+  max-height: 0;
+  opacity: 0;
+  padding: 0 24px;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 0 0 8px 8px;
+  transition:
+    max-height 0.5s cubic-bezier(0.45, 0, 0.25, 1),
+    opacity 0.5s cubic-bezier(0.45, 0, 0.25, 1),
+    padding 0.5s cubic-bezier(0.45, 0, 0.25, 1);
+}
 
-    summary::-webkit-details-marker {
-      display: none;
-    }
+/* Öppen */
+input[type="checkbox"]:checked + label + .content {
+  max-height: 1000px;
+  opacity: 1;
+  padding: 20px 24px 24px 24px;
+}
 
-    .arrow {
-      font-size: 24px;
-      transition: transform 0.4s ease-in-out;
-    }
+.content p {
+  margin: 0 0 10px;
+}
+.content strong {
+  color: #ff8800;
+}
 
-    details[open] .arrow {
-      transform: rotate(45deg);
-    }
-
-    .content-wrapper {
-      max-height: 0;
-      opacity: 0;
-      padding: 0 24px;
-      overflow: hidden;
-      transition:
-        max-height 5s ease-in-out,
-        opacity 5s ease-in-out,
-        padding 5s ease-in-out;
-    }
-
-    details[open] .content-wrapper {
-      max-height: 1000px;
-      opacity: 1;
-      padding: 20px 24px 24px 24px;
-    }
-
-    .content-wrapper p {
-      margin: 0 0 10px;
-    }
-
-    .content-wrapper strong {
-      color: #ff8800;
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 20px 10px;
-      }
-      summary {
-        font-size: 0.95rem;
-        padding: 16px;
-      }
-      .content-wrapper {
-        padding: 10px 16px;
-      }
-    }
-  </style>
+/* Mobil */
+@media (max-width: 480px) {
+  body { padding: 20px 10px; }
+  .accordion label { font-size: 0.95rem; padding: 16px; }
+  .content { padding: 10px 16px; }
+}
+</style>
 </head>
 <body>
 
-  <h1>Produktinformation</h1>
-  <div class="accordion">
+<h1>Produktinformation</h1>
+<div class="accordion">
 
-    <details>
-      <summary>Detaljer <span class="arrow">+</span></summary>
-      <div class="content-wrapper">
-        <p><strong>Underlag:</strong> Optimerad för asfalt och hårda ytor</p>
-        <p><strong>Häldrop:</strong> 5 mm för naturlig löpkänsla</p>
-        <p><strong>Vikt:</strong> Endast 185 gram – lätt och snabb</p>
-        <p><strong>Stödnivå:</strong> Neutral – för dig med stabilt steg</p>
-        <p><strong>Dämpning:</strong> Balanserad för både tempo och komfort</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>Pronation <span class="arrow">+</span></summary>
-      <div class="content-wrapper">
-        <p><strong>Passar dig som:</strong> Har neutralt steg eller underpronerar</p>
-        <p><strong>Fotvalv:</strong> Normalt – varken högt eller lågt</p>
-        <p><strong>Avveckling:</strong> Jämn tryckfördelning över framfoten</p>
-        <p><strong>Stegkontakt:</strong> Landar på utsidan av hälen och rullar mjukt inåt</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>Teknik & Funktioner <span class="arrow">+</span></summary>
-      <div class="content-wrapper">
-        <p><strong>MOTION WRAP™ 2.0:</strong> Sömlös passform med maximal ventilation</p>
-        <p><strong>FF TURBO PLUS:</strong> Responsiv dämpning med extra energiåtergivning</p>
-        <p><strong>Guided Geometry:</strong> Kurvad sula som sparar energi i varje steg</p>
-        <p><strong>Kolfiberplatta:</strong> Ger explosiv kraft i frånskjutet</p>
-      </div>
-    </details>
-
-    <details>
-      <summary>Miljö & Hållbarhet <span class="arrow">+</span></summary>
-      <div class="content-wrapper">
-        <p><strong>Återvunnet material:</strong> Minst 50 % av ovandelen</p>
-        <p><strong>Miljöpåverkan:</strong> 33 % mindre vattenåtgång och 45 % lägre koldioxidutsläpp jämfört med traditionell tillverkning</p>
-      </div>
-    </details>
-
+  <input type="checkbox" id="tab1">
+  <label for="tab1">Detaljer</label>
+  <div class="content">
+    <p><strong>Underlag:</strong> Optimerad för asfalt och hårda ytor</p>
+    <p><strong>Häldrop:</strong> 5 mm</p>
+    <p><strong>Vikt:</strong> 185 g</p>
+    <p><strong>Stödnivå:</strong> Neutral</p>
+    <p><strong>Dämpning:</strong> Balanserad</p>
   </div>
+
+  <input type="checkbox" id="tab2">
+  <label for="tab2">Pronation</label>
+  <div class="content">
+    <p><strong>Passar:</strong> Neutral / Underpronation</p>
+    <p><strong>Fotvalv:</strong> Normalt</p>
+    <p><strong>Avveckling:</strong> Jämn tryckfördelning</p>
+    <p><strong>Stegkontakt:</strong> Landar på utsidan av hälen och rullar inåt</p>
+  </div>
+
+  <input type="checkbox" id="tab3">
+  <label for="tab3">Teknik & Funktioner</label>
+  <div class="content">
+    <p><strong>MOTION WRAP™ 2.0:</strong> Ventilation och komfort</p>
+    <p><strong>FF TURBO PLUS:</strong> Responsiv dämpning</p>
+    <p><strong>Kurvad sula:</strong> Sparar energi i varje steg</p>
+    <p><strong>Kolfiberplatta:</strong> Explosiv kraft</p>
+  </div>
+
+  <input type="checkbox" id="tab4">
+  <label for="tab4">Miljö & Hållbarhet</label>
+  <div class="content">
+    <p><strong>Återvunnet material:</strong> Minst 50 %</p>
+    <p><strong>Miljöpåverkan:</strong> 33 % mindre vatten och 45 % lägre CO₂</p>
+  </div>
+
+</div>
 </body>
 </html>
